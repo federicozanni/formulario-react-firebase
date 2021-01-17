@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Etc = () => {
+const Singin = () => {
 
   const classes = useStyles();
   
@@ -197,4 +197,4 @@ const Etc = () => {
   );
 };
 
-export default Etc;
+export default Singin;
