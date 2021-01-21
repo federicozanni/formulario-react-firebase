@@ -83,14 +83,13 @@ export default function Login() {
         <Typography component="h1" variant="h5">
           Log in
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={2}>
         <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
                 inputRef={register({
-                  required: {value: true, message: 'Campo requerido'},
                   minLength: {value: 2, message: 'minimo 2 letras'},
                   maxLength: {value: 30, message: 'maximo 18 letras'}
                 })}
@@ -107,7 +106,6 @@ export default function Login() {
                 variant="outlined"
                 required
                 inputRef={register({
-                  required: {value: true, message: 'Campo requerido'},
                   minLength: {value: 4, message: 'minimo 2 caracteres'},
                   maxLength: {value: 18, message: 'maximo 10 caracteres'}
                 })}

@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from './Footer';
 import { db } from "./Firebase";
-import { Redirect } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -181,12 +181,12 @@ const Singin = () => {
             color="primary"
             className={classes.submit}
           > Sing in
-              <div> 
-                  {links.length > 0 ? (
-                    <Redirect to="/login" />
-                    ) : <Redirect to="/" /> }
-              </div>
           </Button>
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  {"you have an account? Login"}
+                </Link>
+            </Grid>
         </form>
       </div>
       <Box mt={5}>

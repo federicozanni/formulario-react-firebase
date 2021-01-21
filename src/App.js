@@ -6,7 +6,6 @@ import Login from './components/Login';
 import Menu from './components/Menu';
 import Header from './components/Header';
 
-
 export default function App () {
   return(
     <Router>
