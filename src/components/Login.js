@@ -40,38 +40,37 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
 
   const classes = useStyles();
+  
 
-
+  //generar almacenamiento en localStorage
   let guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
   if(!guardarUsers) {
     guardarUsers = [];
-}
+  }
  
-//state
+
+  //guardar usuario en el state
   const [userlogin, setUserlogin] = useState(guardarUsers);
 
+  
+  //almacenar usuario en localStorage
   useEffect( () => {
-  if(guardarUsers){
-  localStorage.setItem('userlogin', JSON.stringify(userlogin));
-  } else {
-  localStorage.setItem('userlogin', JSON.stringify([]));
-  }
-  }, [userlogin]);
+    localStorage.setItem('userlogin', JSON.stringify(userlogin));
+    }, [userlogin]);
+    
 
-  //Agregar usuario
+  //agregar usuario con su id
   const addUser = (userRegister) => {
     userRegister.id = uuidv4()
     setUserlogin([...userlogin, userRegister])
   }
 
-
-  const AddUserForm = () => {
+  //useForm para maximo y minimo de caracteres
   const {register, handleSubmit} = useForm();
 
-  const onSubmit = (data, e) => {
+
+  const onSubmit = (data) => {
   addUser(data);
-  e.target.reset();
-  console.log(data);
   }
 
   return (
@@ -148,12 +147,4 @@ export default function Login() {
       </Box>
     </Container>
   );
-}
-return (
-  <div className="container">
-    <div className="flex-row">
-        <AddUserForm />
-    </div>
-  </div>
-);
 }

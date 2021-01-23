@@ -9,13 +9,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: 'center',
-  },
 }));
 
-const UserSingin = (props) => {
+const UserSingin = () => {
 
   const classes = useStyles();
 
@@ -25,17 +21,6 @@ const UserSingin = (props) => {
   //state para alcamenar el id actual
   const [currentId, setCurrentId] = useState("");
 
-  //valores iniciales del state
-  const initialStateValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  };
-
-  //state donde se almacena la data
-  const [values, setValues] = useState(initialStateValues);
-  
 
   //obtener datos del firebase y almacenarlo en el state
   const getLinks = async () => {
@@ -63,22 +48,24 @@ const UserSingin = (props) => {
 
   //agrega o edita un dato en firebase
   const addOrEditLink = async (linkObject) => {
-    try {
       if (currentId === "") {
         await db.collection("links").doc().set(linkObject);
       } else {
         await db.collection("links").doc(currentId).update(linkObject);
         setCurrentId("");
       }
-    } catch (error) {
-      console.error(error);
-    }
   };
-
+  
   return (
     <>
       <div className="col-md-4 p-2">
-      {currentId === "" ? null : <FormEditor {...{setValues, values, initialStateValues, addOrEditLink, currentId, links }} />}
+      {currentId === "" ? null : 
+        <FormEditor 
+          currentId={currentId}
+          addOrEditLink={addOrEditLink}
+          links={links}
+
+        />}
 
       </div>
       <div className="col-md-9 p-2">
@@ -88,12 +75,12 @@ const UserSingin = (props) => {
             <div className="card-body">
               
               <div className="d-flex justify-content-between">
-                <b>Nombre:</b>
-                <td>{link.firstName}</td>
-                <b>Apellido:</b>
-                <td>{link.lastName}</td>
+                <b>Name:</b>
+                {link.firstName}
+                <b>Last Name:</b>
+                {link.lastName}
                 <b>Email:</b>
-                <td>{link.email}</td>
+                {link.email}
                 <div>
                 <div className={classes.root}>
                 <Grid container spacing={4}>
@@ -117,8 +104,7 @@ const UserSingin = (props) => {
                     </Button>
                   </Grid>
                   </Grid>
-                   
-                    
+                  
                 </div>
                 </div>
                 </div>

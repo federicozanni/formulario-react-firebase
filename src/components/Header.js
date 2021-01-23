@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,16 +34,14 @@ export default function Header() {
     guardarUsers = [];
 }
  
-//state
+  //state
   const [userlogin, setUserlogin] = useState(guardarUsers);
 
+
   useEffect( () => {
-  if(guardarUsers){
-  localStorage.setItem('userlogin', JSON.stringify(userlogin));
-  } else {
-  localStorage.setItem('userlogin', JSON.stringify([]));
-  }
+    localStorage.setItem('userlogin', JSON.stringify(userlogin));
   }, [userlogin]);
+
 
   //Agregar usuario
   const addUser = (userRegister) => {
@@ -52,12 +49,13 @@ export default function Header() {
     setUserlogin([...userlogin, userRegister])
   }
 
+
   const delateUsers = id => {
     setUserlogin(userlogin.filter(userRegister => userRegister.id !== id))
   }
     
 
-  const AddUserForm = () => {
+  
   const {handleSubmit} = useForm();
 
   const onSubmit = (data, e) => {
@@ -72,51 +70,36 @@ export default function Header() {
         <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
         <Toolbar>
         <Grid item xs={11}>
-        <Link color="inherit" href="https://www.wispro.co/">
-         Wispro
-        </Link>
-          
-          </Grid>
-          
-          <Typography variant="h20" className={classes.title}>
-             <table>
+          <Link color="inherit" href="https://www.wispro.co/">
+          Wispro
+          </Link>
+        </Grid>
+         <Grid item xs={2}>
                     <div>
                       {userlogin.length > 0 ? (
                       userlogin.map((userRegister) => (
-                          <tr key={userRegister.id}>
-                              <td>
+                          <div key={userRegister.id}>
                                  <Button 
                                     size="small"
                                     variant="contained" 
                                     color="default"
                                     className={classes.button}
-                                    onClick={() => {delateUsers(userRegister.id)}}>Logout</Button >
-                              </td>
-                             
-                              <td>{userRegister.email}</td>
-                          </tr>
+                                    onClick={() => {delateUsers(userRegister.id)}}>Logout </Button>
+
+                              {userRegister.email}
+                              
+                          </div>
                       ))
                       ) : (
                       <Redirect to="/login" />
                       )}
                     </div>
-              </table>
-          </Typography>
+          </Grid>
           <Avatar className={classes.avatar}>
          </Avatar>
         </Toolbar>
         </form>
       </AppBar>
-      
   );
   }
-  return(
-    <div>
-      <AddUserForm 
-         userlogin={userlogin} 
-         delateUsers={delateUsers}
-      />
-      
-    </div>
-  )
-}
+ 

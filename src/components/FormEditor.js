@@ -5,7 +5,7 @@ import { db } from "./Firebase";
 const FormEditor = (props) => {
 
   //valores iniciales del state
-  const initialStateValues = {
+  const initialUpdatedValues = {
       firstName: "",
       lastName: "",
       email: "",
@@ -13,88 +13,88 @@ const FormEditor = (props) => {
   };
 
   //state para almacenar los usuarios
-  const [values, setValues] = useState(initialStateValues);
+  const [NewValues, setNewValues] = useState(initialUpdatedValues);
 
   //maneja el cambio del imput
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setNewValues({ ...NewValues, [name]: value });
   };
 
   //valor del state actual
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addOrEditLink(values); 
-    setValues({ ...initialStateValues });
+    props.addOrEditLink(NewValues); 
+    setNewValues({ ...initialUpdatedValues });
   };
 
   //obtener un dato por su id y establecerlo en el formulario
   const getLinkById = async (id) => {
     const doc = await db.collection("links").doc(id).get();
-    setValues({ ...doc.data() });
+    setNewValues({ ...doc.data() });
   };
 
 
   //validacion de los botone edit y delate
   useEffect(() => {
-    if (props.currentId === "") {
-      setValues({ ...initialStateValues });
-    } else {
       getLinkById(props.currentId);
-    }
   }, [props.currentId]);
 
   return (
-    <form onSubmit={handleSubmit} >
-      <div className="form-group input-group">
+      <form onSubmit={handleSubmit} >
+        <div className="form-group input-group">
+          </div>
+          <div className="form-group">
+          <input
+            type="text"
+            required
+            value={NewValues.firstName}
+            name="firstName"
+            placeholder="First Name"
+            className="form-control"
+            onChange={handleInputChange}
+          />
+          </div>
+        <div className="form-group input-group">
+          <div className="form-group">
+          </div>
+          <input
+            type="text"
+            required
+            value={NewValues.lastName}
+            name="lastName"
+            placeholder="Last Name"
+            className="form-control"
+            onChange={handleInputChange}
+          />
         </div>
         <div className="form-group">
         <input
-          type="text"
-          value={values.firstName}
-          name="firstName"
-          placeholder="First Name"
-          className="form-control"
-          onChange={handleInputChange}
-        />
+            type="text"
+            required
+            value={NewValues.email}
+            name="email"
+            placeholder="Email"
+            className="form-control"
+            onChange={handleInputChange}
+          />
         </div>
-      <div className="form-group input-group">
         <div className="form-group">
-        </div>
         <input
-          type="text"
-          value={values.lastName}
-          name="lastName"
-          placeholder="Last Name"
-          className="form-control"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="form-group">
-      <input
-          type="text"
-          value={values.email}
-          name="email"
-          placeholder="Email"
-          className="form-control"
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className="form-group">
-      <input
-          type="password"
-          value={values.password}
-          name="password"
-          placeholder="Password"
-          className="form-control"
-          onChange={handleInputChange}
-        />
-      </div>
+            type="password"
+            required
+            value={NewValues.password}
+            name="password"
+            placeholder="Password"
+            className="form-control"
+            onChange={handleInputChange}
+          />
+        </div>
 
-      <button className="btn btn-primary btn-block">
-        Edit User
-      </button>
-    </form>
+        <button className="btn btn-primary btn-block">
+          Edit User
+        </button>
+      </form>
   );
 };
 

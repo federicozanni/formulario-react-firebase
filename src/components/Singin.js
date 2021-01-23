@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,9 +8,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Footer from './Footer';
 import { db } from "./Firebase";
 import Link from '@material-ui/core/Link';
+import Footer from './Footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,44 +41,9 @@ const useStyles = makeStyles((theme) => ({
 const Singin = () => {
 
   const classes = useStyles();
-  
-   //state para almacenar un nuevo dato
-   const [links, setLinks] = useState([]);
-
-   //state para alcamenar el id actual
-   const [currentId, setCurrentId] = useState("");
- 
-   //obtener datos del firebase y almacenarlo en el state
-   const getLinks = async () => {
-     db.collection("links").onSnapshot((querySnapshot) => {
-       const docs = [];
-       querySnapshot.forEach((doc) => {
-         docs.push({ ...doc.data(), id: doc.id });
-       });
-       setLinks(docs);
-     });
-   };
-
-  //manejar datos que cambian en firebase
-  useEffect(() => {
-    getLinks();
-  }, []);
-
-  //agrega o edita un dato en firebase
-  const addOrEditLink = async (linkObject) => {
-    try {
-      if (currentId === "") {
-        await db.collection("links").doc().set(linkObject);
-      } else {
-        await db.collection("links").doc(currentId).update(linkObject);
-        setCurrentId("");
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
 
+  //valores iniciales del state
   const initialStateValues = {
     firstName: "",
     lastName: "",
@@ -86,27 +51,39 @@ const Singin = () => {
     password: ""
   };
 
-  const [values, setValues] = useState(initialStateValues);
 
+  //state donde se almacena la data
+  const [values, setValues] = useState(initialStateValues);
+  
+
+  //state para alcamenar el id actual
+  const [id, setId] = useState("");
+
+
+  //agrega o edita un dato en firebase
+  const addLink = async (linkObject) => {
+      if (id === "") {
+        await db.collection("links").doc().set(linkObject);
+      } setId('');
+  };
+
+
+  //maneja el cambio del imput
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
 
-  
+
+  //valor del state actual
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    addOrEditLink(values);
+    addLink(values);
     setValues({ ...initialStateValues });
   };
- 
+
 
   return (
-    <>
-      <div className="col-md-4 p-2">
-        
-      </div>
       <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -193,7 +170,6 @@ const Singin = () => {
         <Footer />
       </Box>
     </Container>
-    </>
   );
 };
 

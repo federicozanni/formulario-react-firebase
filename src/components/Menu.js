@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Footer from './Footer';
 import Header from './Header';
 import Graph from './Graph';
@@ -11,6 +11,7 @@ export default function Menu () {
 return (
         <div >
             <Header />
+
         <div className="container">
             <UserSingin />
             
@@ -24,4 +25,4 @@ return (
             </div>  
         </div>
 );
-  }
+}
