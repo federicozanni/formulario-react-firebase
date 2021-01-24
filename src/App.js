@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Singin from './components/Singin'
 import Login from './components/Login';
 import Menu from './components/Menu';
-import Header from './components/Header';
+import Footer from './components/Footer';
 
 export default function App () {
   return(
@@ -23,13 +23,12 @@ export default function App () {
                 <Login />
             </Route>
 
-            <Route path="/header">
-                <Header />
-            </Route>
-            
           </Switch>
 
+          <Footer />
+          
         </Fragment>
       </Router>
+      
   );
 }

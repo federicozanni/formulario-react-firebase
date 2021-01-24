@@ -19,9 +19,7 @@ return (
             <Graph /> 
         </Box>
 
-        <Box mt={15}>
-            <Footer />
-        </Box>
+        <Box mt={6} />
             </div>  
         </div>
 );

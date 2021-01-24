@@ -26,8 +26,7 @@ export default function Graph()  {
     
     return(
         <div className="Graph" style={{width: '100%', height: '520px'}}>
-            <h2>Users</h2>
-            <p>Registered users in the last 30 days </p>
+            <h4>Registered users in the last 30 days</h4>
             <Bar data={data} options={options}/>
         </div>
     );

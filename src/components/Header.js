@@ -1,28 +1,42 @@
 import React, {useState, useEffect} from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import {useForm} from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid';
 import { Redirect } from 'react-router-dom';
-import Link from '@material-ui/core/Link';
-
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
+  '@global': {
+    ul: {
+      margin: 0,
+      padding: 0,
+      listStyle: 'none',
     },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
+  },
+  appBar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+    flexWrap: 'wrap',
+  },
+  toolbarTitle: {
+    flexGrow: 1,
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
+  heroContent: {
+    padding: theme.spacing(8, 0, 6),
+  },
+}));
+
 
 export default function Header() {
 
@@ -55,7 +69,6 @@ export default function Header() {
   }
     
 
-  
   const {handleSubmit} = useForm();
 
   const onSubmit = (data, e) => {
@@ -64,42 +77,51 @@ export default function Header() {
   console.log(data);
   }
 
+
   return (
-    
-      <AppBar position="static">
-        <form className={classes.form} noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Toolbar>
-        <Grid item xs={11}>
+    <React.Fragment>
+      <CssBaseline />
+      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
           <Link color="inherit" href="https://www.wispro.co/">
           Wispro
           </Link>
-        </Grid>
-         <Grid item xs={2}>
-                    <div>
-                      {userlogin.length > 0 ? (
-                      userlogin.map((userRegister) => (
-                          <div key={userRegister.id}>
-                                 <Button 
-                                    size="small"
-                                    variant="contained" 
-                                    color="default"
-                                    className={classes.button}
-                                    onClick={() => {delateUsers(userRegister.id)}}>Logout </Button>
-
-                              {userRegister.email}
-                              
-                          </div>
-                      ))
-                      ) : (
-                      <Redirect to="/login" />
-                      )}
-                    </div>
-          </Grid>
-          <Avatar className={classes.avatar}>
-         </Avatar>
+          </Typography>
+          
+          <div>
+          {userlogin.length > 0 ? (
+            userlogin.map((userRegister) => (
+              <div key={userRegister.id}>
+                
+                {userRegister.email}
+                
+                  <Button color="primary" 
+                          variant="outlined" 
+                          className={classes.link}   
+                          onClick={() => {delateUsers(userRegister.id)}}
+                          > Logout </Button>
+          
+              </div>
+          ))
+          ) : (
+          <Redirect to="/login" />
+          )}
+          </div>
+          
+          
         </Toolbar>
-        </form>
       </AppBar>
+      {/* Hero unit */}
+      <Container maxWidth="sm" component="main" className={classes.heroContent}>
+        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+          Welcome
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" component="p">
+        Change, edit or delete registered users on the page
+        </Typography>
+      </Container>
+      {/* End hero unit */}
+    </React.Fragment>
   );
-  }
- 
+}
