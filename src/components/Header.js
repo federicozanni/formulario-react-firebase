@@ -7,8 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {useForm} from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid';
 import { Redirect } from 'react-router-dom';
 
 
@@ -51,30 +49,15 @@ export default function Header() {
   //state
   const [userlogin, setUserlogin] = useState(guardarUsers);
 
-
+  
   useEffect( () => {
     localStorage.setItem('userlogin', JSON.stringify(userlogin));
   }, [userlogin]);
 
-
-  //Agregar usuario
-  const addUser = (userRegister) => {
-    userRegister.id = uuidv4()
-    setUserlogin([...userlogin, userRegister])
-  }
-
-
+  
+  //eliminar usuario el localStorage
   const delateUsers = id => {
     setUserlogin(userlogin.filter(userRegister => userRegister.id !== id))
-  }
-    
-
-  const {handleSubmit} = useForm();
-
-  const onSubmit = (data, e) => {
-  addUser(data);
-  e.target.reset();
-  console.log(data);
   }
 
 
@@ -108,11 +91,9 @@ export default function Header() {
           <Redirect to="/login" />
           )}
           </div>
-          
-          
+
         </Toolbar>
       </AppBar>
-      {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
           Welcome
@@ -121,7 +102,6 @@ export default function Header() {
         Change, edit or delete registered users on the page
         </Typography>
       </Container>
-      {/* End hero unit */}
     </React.Fragment>
   );
 }

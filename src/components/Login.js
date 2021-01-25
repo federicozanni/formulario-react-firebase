@@ -1,17 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Avatar, Button, CssBaseline, TextField, Grid, Typography, Paper, Link, FormControlLabel, Checkbox } from '@material-ui/core';
 import {useForm} from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid';
-import Paper from '@material-ui/core/Paper';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import { Redirect } from 'react-router-dom';
 
 
@@ -43,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1, 0, 2),
   },
 }));
-
 
 
 export default function Login() {
@@ -157,7 +146,5 @@ export default function Login() {
       </div>
     </Grid>
   </Grid>
-  
-  
   );
 }

@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
 import FormEditor from "./FormEditor";
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import {Table, TableContainer, TableCell, TableBody, TableRow, Button} from '@material-ui/core';
 import { db } from "./Firebase";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-}));
 
 const UserSingin = () => {
 
-  const classes = useStyles();
 
   //state para almacenar un nuevo dato
   const [links, setLinks] = useState([]);
@@ -33,6 +25,7 @@ const UserSingin = () => {
     });
   };
 
+
   //eliminar dato por su id
   const onDeleteLink = async (id) => {
     if (window.confirm("are you sure you want to delete this link?")) {
@@ -41,10 +34,12 @@ const UserSingin = () => {
     }
   };
 
+
   //manejar datos que cambian en firebase
   useEffect(() => {
     getLinks();
   }, []);
+
 
   //agrega o edita un dato en firebase
   const addOrEditLink = async (linkObject) => {
@@ -55,10 +50,11 @@ const UserSingin = () => {
         setCurrentId("");
       }
   };
+
   
   return (
     <>
-      <div className="col-md-4 p-2">
+     <div className="col-md-4 p-2">
       {currentId === "" ? null : 
         <FormEditor 
           currentId={currentId}
@@ -67,52 +63,44 @@ const UserSingin = () => {
         />}
 
       </div>
-      <div className="col-md-9 p-2">
-        {links.length > 0 ?
-        links.map((link) => (
-          <div className="card mb-1" key={link.id}>
-            <div className="card-body">
-              
-              <div className="d-flex justify-content-between">
-                <b>Name:</b>
-                {link.firstName}
-                <b>Last Name:</b>
-                {link.lastName}
-                <b>Email:</b>
-                {link.email}
-                <div>
-                <div className={classes.root}>
-                <Grid container spacing={4}>
-                <Grid item xs={6} sm={4}>
-                       
-                    <Button 
+    <TableContainer>
+       <Table>
+          {links.length > 0 ?
+            links.map((link) => (
+          <TableBody>
+            <TableRow key={link.id}>
+             <TableCell><b>Name:</b></TableCell>
+             <TableCell>{link.firstName}</TableCell>
+             <TableCell><b>Last Name:</b></TableCell>
+             <TableCell>{link.lastName}</TableCell>
+             <TableCell><b>Email:</b></TableCell>
+             <TableCell>{link.email}</TableCell>
+               
+               <TableCell>
+               <Button 
                     variant="contained" 
                     onClick={() => setCurrentId(link.id) }
                     color="primary">
                       Edit
                     </Button>
-                  </Grid>
-                  <Grid item xs={6} sm={3}>
-                  
-                  <Button 
+                 &nbsp;&nbsp;&nbsp;
+                 <Button 
                     variant="contained" 
                     color="secondary"
                     onClick={() => onDeleteLink(link.id)}
                     >
                       Delate
                     </Button>
-                  </Grid>
-                  </Grid>
-                  
-                </div>
-                </div>
-                </div>
-              </div>
-            </div>
-        )) : (
-          <h4>No Users Registed</h4>
-        )}
-      </div>
+                 </TableCell>
+             </TableRow>
+            </TableBody>
+           )) : (
+            <h4>No Users Registed</h4>
+          )}
+         
+       </Table>
+     </TableContainer>
+
     </>
   );
 };
