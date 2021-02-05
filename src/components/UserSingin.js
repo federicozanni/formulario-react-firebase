@@ -4,12 +4,12 @@ import {Table, TableContainer, TableCell, TableBody, TableRow, Button} from '@ma
 import { db } from "./Firebase";
 
 
-const UserSingin = () => {
-
+export const UserSingin = () => {
 
   //state para almacenar un nuevo dato
   const [links, setLinks] = useState([]);
 
+  
   //state para alcamenar el id actual
   const [currentId, setCurrentId] = useState("");
 
@@ -56,7 +56,7 @@ const UserSingin = () => {
     <>
      <div className="col-md-4 p-2">
       {currentId === "" ? null : 
-        <FormEditor 
+        <FormEditor
           currentId={currentId}
           addOrEditLink={addOrEditLink}
           links={links}

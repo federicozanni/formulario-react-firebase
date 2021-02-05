@@ -4,34 +4,34 @@ import { db } from "./Firebase";
 
 const FormEditor = (props) => {
 
-  //valores iniciales del state
-  const initialUpdatedValues = {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: ""
-  };
+   //state donde se almacena la data
+   const [values, setValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+  });
 
-  //state para almacenar los usuarios
-  const [NewValues, setNewValues] = useState(initialUpdatedValues);
 
   //maneja el cambio del imput
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewValues({ ...NewValues, [name]: value });
+    setValues({ ...values, [name]: value });
   };
+
 
   //valor del state actual
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addOrEditLink(NewValues); 
-    setNewValues({ ...initialUpdatedValues });
+    props.addOrEditLink(values); 
+    setValues({ ...values });
   };
+
 
   //obtener un dato por su id y establecerlo en el formulario
   const getLinkById = async (id) => {
     const doc = await db.collection("links").doc(id).get();
-    setNewValues({ ...doc.data() });
+    setValues({ ...doc.data() });
   };
 
 
@@ -40,6 +40,7 @@ const FormEditor = (props) => {
       getLinkById(props.currentId);
   }, [props.currentId]);
 
+  
   return (
       <form onSubmit={handleSubmit} >
         <div className="form-group input-group">
@@ -48,7 +49,7 @@ const FormEditor = (props) => {
           <input
             type="text"
             required
-            value={NewValues.firstName}
+            value={values.firstName}
             name="firstName"
             placeholder="First Name"
             className="form-control"
@@ -61,7 +62,7 @@ const FormEditor = (props) => {
           <input
             type="text"
             required
-            value={NewValues.lastName}
+            value={values.lastName}
             name="lastName"
             placeholder="Last Name"
             className="form-control"
@@ -72,7 +73,7 @@ const FormEditor = (props) => {
         <input
             type="text"
             required
-            value={NewValues.email}
+            value={props.values.email}
             name="email"
             placeholder="Email"
             className="form-control"
@@ -83,7 +84,7 @@ const FormEditor = (props) => {
         <input
             type="password"
             required
-            value={NewValues.password}
+            value={props.values.password}
             name="password"
             placeholder="Password"
             className="form-control"

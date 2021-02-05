@@ -41,7 +41,7 @@ export default function Header() {
   const classes = useStyles();
 
   //datos localstorage login
-  let guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
+  const guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
   if(!guardarUsers) {
     guardarUsers = [];
 }

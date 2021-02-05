@@ -41,7 +41,7 @@ export default function Login() {
   
 
   //generar almacenamiento en localStorage
-  let guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
+  const guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
   if(!guardarUsers) {
     guardarUsers = [];
   }

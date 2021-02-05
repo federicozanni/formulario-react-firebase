@@ -12,7 +12,9 @@ export default function App () {
         <Fragment>
           <Switch>
             <Route path="/" exact>
-                <Singin />
+                <Singin 
+
+                />
             </Route>
 
             <Route path="/menu">
