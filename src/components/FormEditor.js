@@ -73,7 +73,7 @@ const FormEditor = (props) => {
         <input
             type="text"
             required
-            value={props.values.email}
+            value={values.email}
             name="email"
             placeholder="Email"
             className="form-control"
@@ -84,7 +84,7 @@ const FormEditor = (props) => {
         <input
             type="password"
             required
-            value={props.values.password}
+            value={values.password}
             name="password"
             placeholder="Password"
             className="form-control"
