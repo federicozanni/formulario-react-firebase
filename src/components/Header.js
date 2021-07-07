@@ -1,58 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import { makeStyles, Link, Typography, Toolbar, CssBaseline, Button, AppBar, Container } from '@material-ui/core';
+import { Link, Typography, Toolbar, CssBaseline, Button, AppBar, Container } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
+import { HeaderStyle } from '../theme/HeaderStyle';
+import { useLogin } from '../hooks/useLogin';
 
-
-const useStyles = makeStyles((theme) => ({
-  '@global': {
-    ul: {
-      margin: 0,
-      padding: 0,
-      listStyle: 'none',
-    },
-  },
-  appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
-  },
-  toolbar: {
-    flexWrap: 'wrap',
-  },
-  toolbarTitle: {
-    flexGrow: 1,
-  },
-  link: {
-    margin: theme.spacing(1, 1.5),
-  },
-  heroContent: {
-    padding: theme.spacing(8, 0, 6),
-  },
-}));
 
 
 export default function Header() {
 
-  const classes = useStyles();
+  const {
+    userlogin,
+    delateUsers,
+    } = useLogin();
 
-  //datos localstorage login
-  let guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
-  if(!guardarUsers) {
-    guardarUsers = [];
-}
- 
-  //state
-  const [userlogin, setUserlogin] = useState(guardarUsers);
-
-  
-  useEffect( () => {
-    localStorage.setItem('userlogin', JSON.stringify(userlogin));
-  }, [userlogin]);
-
-  
-  //eliminar usuario el localStorage
-  const delateUsers = id => {
-    setUserlogin(userlogin.filter(userRegister => userRegister.id !== id))
-  }
-
+  const { classes } = HeaderStyle();
 
   return (
     <React.Fragment>

@@ -1,72 +1,19 @@
-import React, { useState } from "react";
-import { makeStyles, Avatar, Button, CssBaseline, TextField, Grid, Typography, Container, Link } from '@material-ui/core';
-import { db } from "./Firebase";
+import React from "react";
+import { Avatar, Button, CssBaseline, TextField, Grid, Typography, Container, Link } from '@material-ui/core';
+import { useSingin } from "../hooks/useSingin";
+import { SinginStyle } from "../theme/SinginStyle";
 
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(10),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%', 
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
 
 const Singin = () => {
-
-  const classes = useStyles();
-
-
-  //valores iniciales del state
-  const initialStateValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  };
-
-
-  //state donde se almacena la data
-  const [values, setValues] = useState(initialStateValues);
   
+  const {
+    values,
+    handleInputChange,
+    handleSubmit,
+  } = useSingin();
 
-  //state para alcamenar el id actual
-  const [id, setId] = useState("");
-
-
-  //agrega o edita un dato en firebase
-  const addLink = async (linkObject) => {
-      if (id === "") {
-        await db.collection("links").doc().set(linkObject);
-      } setId('');
-  };
-
-
-  //maneja el cambio del imput
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
-
-  //valor del state actual
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addLink(values);
-    setValues({ ...initialStateValues });
-  };
-
+  const { classes } = SinginStyle();
+  
 
   return (
       <Container component="main" maxWidth="xs">

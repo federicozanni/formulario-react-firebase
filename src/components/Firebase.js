@@ -1,7 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-//conexion a firebase
   const  firebaseConfig = {
     apiKey: "AIzaSyAwRpAatH7vgfqDtCoVbEdM9VLqa1yytWw",
     authDomain: "formulario2-99398.firebaseapp.com",
@@ -10,7 +9,7 @@ import 'firebase/firestore';
     messagingSenderId: "727813498312",
     appId: "1:727813498312:web:e7a5a2dbe19c32056a4cfd"
   };
-  // iniciar firebase
+  
   const fb = firebase.initializeApp(firebaseConfig);
 
 export const db = fb.firestore(); 

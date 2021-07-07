@@ -1,78 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import { makeStyles, Avatar, Button, CssBaseline, TextField, Grid, Typography, Paper, Link, FormControlLabel, Checkbox } from '@material-ui/core';
-import {useForm} from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+import { Avatar, Button, CssBaseline, TextField, Grid, Typography, Paper, Link, FormControlLabel, Checkbox } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '91vh',
-  },
-  image: {
-    backgroundImage: 'url(https://infovideopub.com/wp-content/uploads/2017/05/video-background-paginas-web-1.jpg)',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  paper: {
-    margin: theme.spacing(2, 6),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  avatar: {
-    margin: theme.spacing(3),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: '100%',
-    marginTop: theme.spacing(2),
-  },
-  submit: {
-    margin: theme.spacing(1, 0, 2),
-  },
-}));
-
-
+import { useLogin } from '../hooks/useLogin';
+import { LoginStyle } from '../theme/LoginStyle';
 
 
 export default function Login() {
-
-  const classes = useStyles();
   
-  
-  //generar almacenamiento en localStorage
-  let guardarUsers = JSON.parse(localStorage.getItem('userlogin'));
-  if(!guardarUsers) {
-    guardarUsers = [];
-  }
- 
+  const {
+    userlogin,
+    register,
+    onSubmit,
+    handleSubmit, 
+    } = useLogin();
 
-  //guardar usuario en el state
-  const [userlogin, setUserlogin] = useState(guardarUsers);
+    const { classes } = LoginStyle();
 
   
-  //almacenar usuario en localStorage
-  useEffect( () => {
-    localStorage.setItem('userlogin', JSON.stringify(userlogin));
-    }, [userlogin]);
-    
-
-  //agregar usuario con su id
-  const addUser = (userRegister) => {
-    userRegister.id = uuidv4()
-    setUserlogin([...userlogin, userRegister])
-  }
-
-  //useForm para maximo y minimo de caracteres
-  const {register, handleSubmit} = useForm();
-
-
-  const onSubmit = (data) => {
-  addUser(data);
-  }
-
   return (
     <Grid container component="main" className={classes.root}>
     <CssBaseline />
