@@ -5,7 +5,7 @@ import { useLogin } from '../hooks/useLogin';
 import { LoginStyle } from '../theme/LoginStyle';
 
 
-export default function Login() {
+export const Login = () => {
   
   const {
     userlogin,

@@ -6,7 +6,7 @@ import { useLogin } from '../hooks/useLogin';
 
 
 
-export default function Header() {
+export const Header = () => {
 
   const {
     userlogin,
@@ -21,8 +21,8 @@ export default function Header() {
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-          <Link color="inherit" href="https://www.wispro.co/">
-          Wispro
+          <Link color="inherit" href="https://www.linkedin.com/in/federicozanni/">
+          Formulario
           </Link>
           </Typography>
           

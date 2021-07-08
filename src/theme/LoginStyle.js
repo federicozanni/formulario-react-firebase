@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/core';
+import background from '../assets/background-login.jpg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '91vh',
   },
   image: {
-    backgroundImage: 'url(https://infovideopub.com/wp-content/uploads/2017/05/video-background-paginas-web-1.jpg)',
+    backgroundImage: `url(${background})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     backgroundPosition: 'center',

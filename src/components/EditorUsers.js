@@ -1,42 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { db } from "./Firebase";
+import React from 'react'
 
+export const EditorUsers = (props) => {
 
-const FormEditor = (props) => {
-
-   const [values, setValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
-  });
-
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.addOrEditLink(values); 
-  };
-
-
-  const getLinkById = async (id) => {
-    const doc = await db.collection("links").doc(id).get();
-    setValues({ ...doc.data() });
-  };
-
-
-  useEffect(() => {
-      getLinkById(props.currentId);
-  }, [props.currentId]);
-
+  const {
+    values,
+    handleSubmit,
+    handleInputChange
+  } = props;
   
+
   return (
-      <form onSubmit={handleSubmit} >
+    <form onSubmit={handleSubmit} >
         <div className="form-group input-group">
           </div>
           <div className="form-group">
@@ -90,7 +64,5 @@ const FormEditor = (props) => {
           Edit User
         </button>
       </form>
-  );
-};
-
-export default FormEditor;
+  )
+}

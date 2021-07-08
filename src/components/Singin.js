@@ -4,7 +4,7 @@ import { useSingin } from "../hooks/useSingin";
 import { SinginStyle } from "../theme/SinginStyle";
 
 
-const Singin = () => {
+export const Singin = () => {
   
   const {
     values,
@@ -101,5 +101,3 @@ const Singin = () => {
     </Container>
   );
 };
-
-export default Singin;

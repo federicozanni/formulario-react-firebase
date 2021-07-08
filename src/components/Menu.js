@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from './Header';
-import UserSingin from './UserSingin';
+import { Header } from './Header';
+import { UserSingin } from './UserSingin';
 import Box from '@material-ui/core/Box';
 import { MenuStyle } from '../theme/MenuStyle';
 
-export default function Menu () {
+export const Menu = () => {
 
 	const { classes } = MenuStyle();
 

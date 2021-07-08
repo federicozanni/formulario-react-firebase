@@ -1,7 +1,7 @@
 import React from "react";
-import FormEditor from "./FormEditor";
-import {Table, TableContainer, TableCell, TableBody, TableRow, Button} from '@material-ui/core';
 import { useUserSing } from "../hooks/useUserSing";
+import {Table, TableContainer, TableCell, TableBody, TableRow, Button} from '@material-ui/core';
+import { FormEditor } from "../hooks/FormEditor";
 
 
 export const UserSingin = () => {
@@ -18,14 +18,18 @@ export const UserSingin = () => {
   return (
     <>
      <div className="col-md-4 p-2">
-      {currentId === "" ? null : 
-        <FormEditor
-          currentId={currentId}
-          addOrEditLink={addOrEditLink}
-          links={links}
-        />}
+      {
+        currentId === "" 
+        ? null 
+        : <FormEditor
+            currentId={currentId}
+            addOrEditLink={addOrEditLink}
+            links={links}
+          />
+      }
 
       </div>
+      
     <TableContainer>
        <Table>
           {links.length > 0 ?
@@ -67,5 +71,3 @@ export const UserSingin = () => {
     </>
   );
 };
-
-export default UserSingin;

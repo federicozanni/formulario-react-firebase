@@ -1,12 +1,12 @@
 import React, {Fragment} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
-import Singin from './components/Singin'
-import Login from './components/Login';
-import Menu from './components/Menu';
-import Footer from './components/Footer';
+import { Singin } from './components/Singin'
+import { Login } from './components/Login';
+import { Menu } from './components/Menu';
+import { Footer } from './components/Footer';
 
-export default function App () {
+export const App = () => {
   return(
     <Router>
         <Fragment>

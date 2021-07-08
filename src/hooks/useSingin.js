@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { db } from "../components/Firebase";
+import { db } from "../config/Firebase";
 
 export const useSingin = () => {
 
