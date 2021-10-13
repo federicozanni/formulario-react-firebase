@@ -1,6 +1,6 @@
 # React Formulario Firebase
 
-Formulario hecho con `React.js`, utilizando `Hooks`, `Material-UI` y `Firebase` para el Back-end
+Formulario hecho con `React.js`, utilizando `Hooks`, `Material-UI` y `Firebase` para el Backend
 
 ## Configuración
 
